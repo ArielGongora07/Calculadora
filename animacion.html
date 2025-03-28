@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animación</title>
+    <link rel="stylesheet" href="styles/animacion.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="informacion.html">Información</a></li>
+                <li><a href="2d.html">2D</a></li>
+                <li><a href="3D.html">3D</a></li>
+                <li><a href="Animacion.html">Animación</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Animación del Rectángulo</h1>
+        <div class="pizarron">
+            <div id="rectangulo" class="rectangulo"></div>
+        </div>
+        <div class="botones">
+            <button onclick="rotarRectangulo()">Rotar</button>
+            <button onclick="trasladarRectangulo()">Trasladar</button>
+        </div>
+    </main>
+
+  
+
+    <script>
+        let rotacionActual = 0;
+        const angulosRotacion = [45, 90, 135, 180];
+        let indiceRotacion = 0;
+
+        let traslacionActual = 0;
+        const distanciasTraslacion = [50, 100, 150, 200];
+        let indiceTraslacion = 0;
+
+        function rotarRectangulo() {
+            const rectangulo = document.getElementById('rectangulo');
+            rotacionActual = angulosRotacion[indiceRotacion];
+            rectangulo.style.transform = `rotate(${rotacionActual}deg)`;
+            indiceRotacion = (indiceRotacion + 1) % angulosRotacion.length;
+        }
+
+        function trasladarRectangulo() {
+            const rectangulo = document.getElementById('rectangulo');
+            traslacionActual = distanciasTraslacion[indiceTraslacion];
+            rectangulo.style.transform = `translateX(${traslacionActual}px)`;
+            indiceTraslacion = (indiceTraslacion + 1) % distanciasTraslacion.length;
+        }
+    </script>
+</body>
+</html>

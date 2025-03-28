@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Área</title>
+    <link rel="stylesheet" href="styles/estilos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="informacion.html">Información</a></li>
+                <li><a href="2d.html">2D</a></li>
+                <li><a href="3d.html">3D</a></li>
+                <li><a href="Animacion.html">Animación</a></li>
+            </ul>
+        </nav>
+        
+    </header>
+
+    <main>
+        <div class="hero">
+            <p>Calculadora de Área.</p>
+        </div>
+        <div class="container">
+            <div class="image-upload">
+                <label for="imageInput" class="upload-label">
+                    Subir imagen
+                    <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                </label>
+                <div id="imagePreview" class="image-preview"></div>
+            </div>
+
+            <form id="areaForm">
+                <label for="altura">Altura:</label>
+                <input type="number" id="altura" name="altura" placeholder="Ingresa la altura" required>
+                
+                <label for="base">Base:</label>
+                <input type="number" id="base" name="base" placeholder="Ingresa la base" required>
+                
+                <button type="button" onclick="calcularArea()">Calcular</button>
+                <button type="button" onclick="limpiarFormulario()">Limpiar</button>
+            </form>
+        </div>
+
+        <p id="resultado"></p>
+    </main>
+
+    <footer>
+        
+    </footer>
+
+    <script>
+        function calcularArea() {
+            const altura = parseFloat(document.getElementById('altura').value);
+            const base = parseFloat(document.getElementById('base').value);
+            if (!isNaN(altura) && !isNaN(base)) {
+                const area = altura * base;
+                document.getElementById('resultado').innerHTML = `<span class="highlight">El área del rectángulo es: ${area}</span>`;
+            } else {
+                document.getElementById('resultado').innerHTML = `<span class="highlight" style="color:red;">Por favor, ingresa valores válidos.</span>`;
+            }
+        }
+
+        function limpiarFormulario() {
+            document.getElementById('areaForm').reset();
+            document.getElementById('resultado').innerHTML = '';
+        }
+
+        document.getElementById('imageInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const imagePreview = document.getElementById('imagePreview');
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.innerHTML = `<img src="${e.target.result}" alt="Imagen subida" style="max-width: 100%; height: auto; border-radius: 10px;">`;
+                };
+                reader.onerror = function() {
+                    imagePreview.innerHTML = `<p style="color: red;">Error al cargar la imagen. Por favor, inténtalo nuevamente.</p>`;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                imagePreview.innerHTML = `<p style="color: gray;">No se seleccionó ninguna imagen.</p>`;
+            }
+        });
+    </script>
+</body>
+</html>
